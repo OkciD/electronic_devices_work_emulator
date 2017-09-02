@@ -1,0 +1,9 @@
+#mainMenuButton
+{
+    background-color: blue;
+}
+
+#mainMenuButton:hover
+{
+    background-color: red;
+}
