@@ -7,13 +7,11 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     QHBoxLayout *navigationLayout = new QHBoxLayout;
-    QPushButton *chooseButton = new QPushButton("Выбор устройства"), *guideButton = new QPushButton("Учебник");
+    QPushButton *sampleButton = new QPushButton("Здесь могли бы быть кнопки с выбором устройств");
 
-    chooseButton->setObjectName("mainMenuButton");
-    guideButton->setObjectName("mainMenuButton");
+    sampleButton->setObjectName("mainMenuButton");
 
-    navigationLayout->addWidget(chooseButton);
-    navigationLayout->addWidget(guideButton);
+    navigationLayout->addWidget(sampleButton);
 
     QWidget *navigationWidget = new QWidget();
     navigationWidget->setLayout(navigationLayout);
