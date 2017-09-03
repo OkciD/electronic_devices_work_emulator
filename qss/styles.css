@@ -1,9 +1,9 @@
-#mainMenuButton
+#mainWindow QPushButton
 {
     background-color: blue;
 }
 
-#mainMenuButton:hover
+#mainWindow QPushButton:hover
 {
     background-color: red;
 }
