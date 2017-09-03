@@ -12,8 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     navigationWidget->setLayout(navigationLayout);
     navigationLayout->addStretch();
 
-    DatabaseManager databaseManager;
-    QVector<QString> categories = databaseManager.getCategories();
+    QVector<QString> categories = DatabaseManager::instance().getCategories();
     for ( QVector<QString>::iterator iterator = categories.begin();
           iterator != categories.end();
           iterator++)

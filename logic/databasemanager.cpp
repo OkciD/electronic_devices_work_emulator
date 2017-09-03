@@ -4,6 +4,12 @@
 #include <QFile>
 #include <QDebug>
 
+DatabaseManager &DatabaseManager::instance()
+{
+    static DatabaseManager instance;
+    return instance;
+}
+
 DatabaseManager::DatabaseManager()
 {   
     db_ = QSqlDatabase::addDatabase("QSQLITE");

@@ -6,15 +6,20 @@
 class DatabaseManager
 {
 public:
-    DatabaseManager();
+    static DatabaseManager &instance();
     const QVector<QString> getCategories();
     ~DatabaseManager();
+
 private:
+    DatabaseManager();
+    void openDatabase_();
+    void createDatabase_();
+    DatabaseManager(const DatabaseManager &databaseManager);
+    DatabaseManager &operator=(const DatabaseManager &databaseManager);
+
     QSqlDatabase db_;
     const QString dbName_ = "devices.db";
     const QString sqlDumpName_ = ":/database/devices.sql";
-    void openDatabase_();
-    void createDatabase_();
 };
 
 

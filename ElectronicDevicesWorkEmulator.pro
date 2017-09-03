@@ -31,8 +31,7 @@ SOURCES += \
 HEADERS += \
         interface/mainwindow.h \
     exception/exception.h \
-    logic/databasemanager.h \
-    global.h
+    logic/databasemanager.h
 
 RESOURCES += \
     resources.qrc
