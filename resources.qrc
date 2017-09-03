@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>qss/styles.css</file>
-        <file>database/devices.sql</file>
+        <file>resources/database/devices.sql</file>
+        <file>resources/qss/styles.css</file>
     </qresource>
 </RCC>

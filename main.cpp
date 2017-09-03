@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 
     QFile styleFile;
 
-    styleFile.setFileName(":/qss/styles.css");
+    styleFile.setFileName(":/resources/qss/styles.css");
     styleFile.open(QFile::ReadOnly);
     QString qssString = styleFile.readAll();
     styleFile.close();

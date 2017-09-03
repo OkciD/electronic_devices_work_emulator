@@ -19,7 +19,7 @@ private:
 
     QSqlDatabase db_;
     const QString dbName_ = "devices.db";
-    const QString sqlDumpName_ = ":/database/devices.sql";
+    const QString sqlDumpName_ = ":/resources/database/devices.sql";
 };
 
 
