@@ -8,7 +8,7 @@ namespace models
 class Category
 {
 public:
-    Category(const int &id, const QString &name);
+    Category(const int &id = 0, const QString &name = "");
     const int &getId() const;
     const QString &getName() const;
 private:

@@ -26,19 +26,18 @@ ModelsManager::ModelsManager()
     }
 }
 
-const QVector<QString> ModelsManager::getCategories()
+const QVector<Category> ModelsManager::getCategories()
 {
-    QVector<QString> result;
+    QVector<Category> result;
     QSqlQuery query(db_);
-    if ( !query.exec("SELECT name FROM category") )
+    if ( !query.exec("SELECT id, name FROM category") )
     {
-        result.append(query.lastError().text());
-        return result;
+        throw Exception("Невозможно выполнить запрос к базе данных");
     }
 
     for (; query.next() ;)
     {
-        result.append(query.value(0).toString());
+        result.append(Category(query.value(0).toInt(), query.value(1).toString()));
     }
 
     return result;

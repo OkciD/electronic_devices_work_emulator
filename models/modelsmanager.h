@@ -10,7 +10,7 @@ class ModelsManager
 {
 public:
     static ModelsManager &instance();
-    const QVector<QString> getCategories();
+    const QVector<Category> getCategories();
     ~ModelsManager();
 
 private:

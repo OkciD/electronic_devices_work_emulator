@@ -12,12 +12,12 @@ MainWindow::MainWindow(QWidget *parent)
     navigationWidget->setLayout(navigationLayout);
     navigationLayout->addStretch();
 
-    QVector<QString> categories = models::ModelsManager::instance().getCategories();
-    for ( QVector<QString>::iterator iterator = categories.begin();
+    QVector<models::Category> categories = models::ModelsManager::instance().getCategories();
+    for ( QVector<models::Category>::iterator iterator = categories.begin();
           iterator != categories.end();
           iterator++ )
     {
-        navigationLayout->addWidget(new QPushButton(*iterator));
+        navigationLayout->addWidget(new QPushButton(iterator->getName()));
     }
     navigationLayout->addStretch();
 
