@@ -4,6 +4,8 @@
 #include <QFile>
 #include <QDebug>
 
+using namespace models;
+
 ModelsManager &ModelsManager::instance()
 {
     static ModelsManager instance;

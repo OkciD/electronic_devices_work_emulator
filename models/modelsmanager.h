@@ -2,15 +2,16 @@
 #define MODELSMANAGER_H
 
 #include <QtSql>
+#include "category.h"
 
+namespace models
+{
 class ModelsManager
 {
 public:
     static ModelsManager &instance();
     const QVector<QString> getCategories();
     ~ModelsManager();
-
-
 
 private:
     ModelsManager();
@@ -23,6 +24,6 @@ private:
     const QString dbName_ = "devices.db";
     const QString sqlDumpName_ = ":/resources/database/devices.sql";
 };
-
+}
 
 #endif // MODELSMANAGER_H
