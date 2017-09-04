@@ -26,12 +26,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         interface/mainwindow.cpp \
-    logic/databasemanager.cpp
+    models/modelsmanager.cpp
 
 HEADERS += \
         interface/mainwindow.h \
     exception/exception.h \
-    logic/databasemanager.h
+    models/modelsmanager.h
 
 RESOURCES += \
     resources.qrc

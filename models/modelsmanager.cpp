@@ -1,16 +1,16 @@
-#include "databasemanager.h"
+#include "modelsmanager.h"
 #include <QErrorMessage>
 #include "exception/exception.h"
 #include <QFile>
 #include <QDebug>
 
-DatabaseManager &DatabaseManager::instance()
+ModelsManager &ModelsManager::instance()
 {
-    static DatabaseManager instance;
+    static ModelsManager instance;
     return instance;
 }
 
-DatabaseManager::DatabaseManager()
+ModelsManager::ModelsManager()
 {   
     db_ = QSqlDatabase::addDatabase("QSQLITE");
 
@@ -24,7 +24,7 @@ DatabaseManager::DatabaseManager()
     }
 }
 
-const QVector<QString> DatabaseManager::getCategories()
+const QVector<QString> ModelsManager::getCategories()
 {
     QVector<QString> result;
     QSqlQuery query(db_);
@@ -42,7 +42,7 @@ const QVector<QString> DatabaseManager::getCategories()
     return result;
 }
 
-void DatabaseManager::openDatabase_()
+void ModelsManager::openDatabase_()
 {
     db_.setDatabaseName(dbName_);
     if (!db_.open())
@@ -51,7 +51,7 @@ void DatabaseManager::openDatabase_()
     }
 }
 
-void DatabaseManager::createDatabase_()
+void ModelsManager::createDatabase_()
 {
     openDatabase_();
 
@@ -73,7 +73,7 @@ void DatabaseManager::createDatabase_()
     }
 }
 
-DatabaseManager::~DatabaseManager()
+ModelsManager::~ModelsManager()
 {
     db_.close();
 }

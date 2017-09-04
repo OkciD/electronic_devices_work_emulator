@@ -2,7 +2,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QPushButton>
-#include <logic/databasemanager.h>
+#include <models/modelsmanager.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     navigationWidget->setLayout(navigationLayout);
     navigationLayout->addStretch();
 
-    QVector<QString> categories = DatabaseManager::instance().getCategories();
+    QVector<QString> categories = ModelsManager::instance().getCategories();
     for ( QVector<QString>::iterator iterator = categories.begin();
           iterator != categories.end();
           iterator++)
