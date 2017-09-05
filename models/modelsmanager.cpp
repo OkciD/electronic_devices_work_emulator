@@ -29,11 +29,7 @@ ModelsManager::ModelsManager()
 const QVector<Category> ModelsManager::getCategories()
 {
     QVector<Category> result;
-    QSqlQuery query(db_);
-    if ( !query.exec("SELECT id, name FROM category") )
-    {
-        throw Exception("Невозможно выполнить запрос к базе данных");
-    }
+    QSqlQuery query = executeQuery_("SELECT id, name FROM category");
 
     for (; query.next() ;)
     {
@@ -41,6 +37,11 @@ const QVector<Category> ModelsManager::getCategories()
     }
 
     return result;
+}
+
+const Category ModelsManager::getCategory(const int &categoryId)
+{
+
 }
 
 void ModelsManager::openDatabase_()
@@ -72,6 +73,18 @@ void ModelsManager::createDatabase_()
     {
         query.exec(iterator->data());
     }
+}
+
+const QSqlQuery ModelsManager::executeQuery_(const QString &queryString)
+{
+    QSqlQuery query(db_);
+
+    if ( !query.exec(queryString) )
+    {
+        throw Exception("Невозможно выполнить запрос к базе данных");
+    }
+
+    return query;
 }
 
 ModelsManager::~ModelsManager()

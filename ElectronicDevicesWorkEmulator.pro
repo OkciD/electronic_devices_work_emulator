@@ -27,13 +27,15 @@ SOURCES += \
         main.cpp \
         interface/mainwindow.cpp \
     models/modelsmanager.cpp \
-    models/category.cpp
+    models/category.cpp \
+    models/device.cpp
 
 HEADERS += \
         interface/mainwindow.h \
     exception/exception.h \
     models/modelsmanager.h \
-    models/category.h
+    models/category.h \
+    models/device.h
 
 RESOURCES += \
     resources.qrc

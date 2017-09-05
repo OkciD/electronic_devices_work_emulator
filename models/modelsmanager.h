@@ -11,12 +11,14 @@ class ModelsManager
 public:
     static ModelsManager &instance();
     const QVector<Category> getCategories();
+    const Category getCategory(const int &categoryId);
     ~ModelsManager();
 
 private:
     ModelsManager();
     void openDatabase_();
     void createDatabase_();
+    const QSqlQuery executeQuery_(const QString &queryString);
     ModelsManager(const ModelsManager &databaseManager);
     ModelsManager &operator=(const ModelsManager &databaseManager);
 

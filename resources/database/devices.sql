@@ -27,11 +27,11 @@ CREATE TABLE "device" (
 	`category_id`	INTEGER,
 	`short_name`	TEXT,
 	`full_name`	TEXT,
-	`truth_table_file`	TEXT,
+	`truth_table`	TEXT,
 	`image_file`	TEXT,
 	FOREIGN KEY(`category_id`) REFERENCES category
 );
-INSERT INTO `device` (id,category_id,short_name,full_name,truth_table_file,image_file) VALUES (1,1,'NOT','Инвертор',NULL,NULL),
+INSERT INTO `device` (id,category_id,short_name,full_name,truth_table,image_file) VALUES (1,1,'NOT','Инвертор',NULL,NULL),
  (2,1,'AND','Элемент 2И',NULL,NULL),
  (3,1,'NAND','Элемент 2И-НЕ',NULL,NULL);
 CREATE TABLE `category` (
