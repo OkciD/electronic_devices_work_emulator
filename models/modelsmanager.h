@@ -3,6 +3,7 @@
 
 #include <QtSql>
 #include "category.h"
+#include "device.h"
 
 namespace models
 {
@@ -12,6 +13,7 @@ public:
     static ModelsManager &instance();
     const QVector<Category> getCategories();
     const Category getCategory(const int &categoryId);
+    const QVector<Device> getDevicesInCategory(const int &categoryId);
     ~ModelsManager();
 
 private:
