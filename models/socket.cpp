@@ -2,10 +2,17 @@
 
 using namespace models;
 
-Socket::Socket(const int &id, const QString &name, const QString &type):
-    id_(id), name_(name), type_(type), condition_("")
+Socket::Socket(const int &id, const QString &name, const QString &type, const QString &conditionsString):
+    id_(id), name_(name), type_(type), conditions_(conditionsString.split(" "))
 {
-
+    if ( !conditions_.empty() )
+    {
+        currentCondition_ = conditions_.first();
+    }
+    else
+    {
+        currentCondition_ = "";
+    }
 }
 
 const int &Socket::getId() const
@@ -25,10 +32,10 @@ const QString &Socket::getType() const
 
 void Socket::setCondition(const QString &condition)
 {
-    condition_ = condition;
+    currentCondition_ = condition;
 }
 
 const QString &Socket::getCondition() const
 {
-    return condition_;
+    return currentCondition_;
 }
