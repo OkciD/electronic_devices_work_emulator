@@ -2,6 +2,8 @@
 #define DEVICE_H
 
 #include "category.h"
+#include "socket.h"
+#include <QVector>
 
 namespace models
 {
@@ -16,7 +18,9 @@ public:
 private:
     int id_;
     Category category_;
-    QString shortName_, fullName_;
+    QString shortName_;
+    QString fullName_;
+    QVector<Socket> sockets_;
 };
 }
 

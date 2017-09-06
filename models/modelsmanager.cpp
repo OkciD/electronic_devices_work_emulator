@@ -62,7 +62,9 @@ const QVector<Device> ModelsManager::getDevicesInCategory(const int &categoryId)
 
 QVector<Socket> ModelsManager::getDevicesSockets(const int &deviceId)
 {
-    QSqlQuery query = executeQuery_("SELECT socket.id, socket.name, socket.type, truth_table.conditions FROM socket INNER JOIN truth_table ON truth_table.socket_id = socket.id WHERE truth_table.device_id = " + QString::number(deviceId));
+    QSqlQuery query = executeQuery_("SELECT socket.id, socket.name, socket.type, truth_table.conditions "
+                                    "FROM socket INNER JOIN truth_table ON truth_table.socket_id = socket.id "
+                                    "WHERE truth_table.device_id = " + QString::number(deviceId));
     QVector<Socket> result;
     for (; query.next() ;)
     {

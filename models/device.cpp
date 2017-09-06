@@ -6,9 +6,13 @@ using namespace models;
 Device::Device(const int &id, const int &categoryId, const QString &shortName, const QString &fullName):
     id_(id), shortName_(shortName), fullName_(fullName)
 {
-    if ( categoryId > 0 )
+    if ( categoryId != 0 )
     {
         category_ = ModelsManager::instance().getCategory(categoryId);
+    }
+    if ( id != 0 )
+    {
+        sockets_ = ModelsManager::instance().getDevicesSockets(id);
     }
 }
 
