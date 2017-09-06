@@ -12,7 +12,19 @@ Device::Device(const int &id, const int &categoryId, const QString &shortName, c
     }
     if ( id != 0 )
     {
-        sockets_ = ModelsManager::instance().getDevicesSockets(id);
+        inputSockets_ = ModelsManager::instance().getDevicesSockets(id);
+        for ( QVector<Socket>::iterator iterator = inputSockets_.begin();
+              iterator != inputSockets_.end(); )
+        {
+            if ( iterator->getType() == "out" )
+            {
+                outputSockets_.append(inputSockets_.takeAt(iterator - inputSockets_.begin()));
+            }
+            else
+            {
+                iterator++;
+            }
+        }
     }
 }
 

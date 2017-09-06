@@ -15,12 +15,14 @@ public:
     const Category &getCategory() const;
     const QString &getShortName() const;
     const QString &getFullName() const;
+
 private:
     int id_;
     Category category_;
     QString shortName_;
     QString fullName_;
-    QVector<Socket> sockets_;
+    QVector<Socket> inputSockets_;
+    QVector<Socket> outputSockets_;
 };
 }
 
