@@ -60,6 +60,18 @@ const QVector<Device> ModelsManager::getDevicesInCategory(const int &categoryId)
     return result;
 }
 
+QVector<Socket> ModelsManager::getDevicesSockets(const int &deviceId)
+{
+    QSqlQuery query = executeQuery_("SELECT socket.id, socket.name, socket.type FROM socket INNER JOIN truth_table ON truth_table.socket_id = socket.id WHERE truth_table.device_id = " + QString::number(deviceId));
+    QVector<Socket> result;
+    for (; query.next() ;)
+    {
+        result.append(Socket(query.value(0).toInt(), query.value(1).toString(), query.value(2).toString()));
+    }
+
+    return result;
+}
+
 void ModelsManager::openDatabase_()
 {
     db_.setDatabaseName(dbName_);
@@ -97,6 +109,7 @@ const QSqlQuery ModelsManager::executeQuery_(const QString &queryString)
 
     if ( !query.exec(queryString) )
     {
+        qDebug() << query.lastError();
         throw Exception("Невозможно выполнить запрос к базе данных");
     }
 

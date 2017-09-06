@@ -4,6 +4,7 @@
 #include <QtSql>
 #include "category.h"
 #include "device.h"
+#include "socket.h"
 
 namespace models
 {
@@ -14,6 +15,7 @@ public:
     const QVector<Category> getCategories();
     const Category getCategory(const int &categoryId);
     const QVector<Device> getDevicesInCategory(const int &categoryId);
+    QVector<Socket> getDevicesSockets(const int &deviceId);
     ~ModelsManager();
 
 private:
