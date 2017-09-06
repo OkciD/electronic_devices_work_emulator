@@ -16,6 +16,7 @@ public:
     const Category getCategory(const int &categoryId);
     const QVector<Device> getDevicesInCategory(const int &categoryId);
     QVector<Socket> getDevicesSockets(const int &deviceId);
+    Device getDevice(const int &deviceId);
     ~ModelsManager();
 
 private:
