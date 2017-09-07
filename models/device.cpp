@@ -47,3 +47,41 @@ const QString &Device::getFullName() const
 {
     return fullName_;
 }
+
+QVector<Socket> &Device::getInputSockets()
+{
+    return inputSockets_;
+}
+
+QVector<Socket> &Device::getOutputSockets()
+{
+    return outputSockets_;
+}
+
+
+void Device::calculateOutputSignal()
+{
+    size_t i = 0;
+    for ( ; i < inputSockets_[0].getConditions().length(); ++i )
+    {
+        size_t j = 0;
+        for ( ; j < inputSockets_.length(); ++j )
+        {
+            if ( inputSockets_[j].getCurrentCondition() != inputSockets_[j].getConditions()[i] )
+            {
+                break;
+            }
+        }
+        if ( j == inputSockets_.length() )
+        {
+            break;
+        }
+    }
+
+    for ( QVector<Socket>::iterator iterator = outputSockets_.begin();
+          iterator != outputSockets_.end();
+          iterator++ )
+    {
+        iterator->setCurrentCondition(iterator->getConditions()[i]);
+    }
+}

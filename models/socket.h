@@ -13,8 +13,9 @@ public:
     const int &getId() const;
     const QString &getName() const;
     const QString &getType() const;
-    void setCondition(const QString &condition);
-    const QString &getCondition() const;
+    void setCurrentCondition(const QString &condition);
+    const QString &getCurrentCondition() const;
+    const QStringList &getConditions() const;
 
 private:
     int id_;

@@ -30,12 +30,17 @@ const QString &Socket::getType() const
     return type_;
 }
 
-void Socket::setCondition(const QString &condition)
+void Socket::setCurrentCondition(const QString &condition)
 {
     currentCondition_ = condition;
 }
 
-const QString &Socket::getCondition() const
+const QString &Socket::getCurrentCondition() const
 {
     return currentCondition_;
+}
+
+const QStringList &Socket::getConditions() const
+{
+    return conditions_;
 }
