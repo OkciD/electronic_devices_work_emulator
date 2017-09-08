@@ -1,6 +1,7 @@
 #ifndef MODELSMANAGER_H
 #define MODELSMANAGER_H
 
+#include <QPair>
 #include <QtSql>
 #include "category.h"
 #include "device.h"
@@ -14,7 +15,7 @@ public:
     static ModelsManager &instance();
     const QVector<Category> getCategories();
     const Category getCategory(const int &categoryId);
-    const QVector<Device> getDevicesInCategory(const int &categoryId);
+    const QVector<QPair<const int, const QString>> getDeviceNamesInCategory(const int &categoryId);
     QVector<Socket> getDevicesSockets(const int &deviceId);
     Device getDevice(const int &deviceId);
     ~ModelsManager();

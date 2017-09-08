@@ -47,15 +47,15 @@ const Category ModelsManager::getCategory(const int &categoryId)
     return Category(query.value(0).toInt(), query.value(1).toString());
 }
 
-const QVector<Device> ModelsManager::getDevicesInCategory(const int &categoryId)
+const QVector<QPair<const int, const QString>> ModelsManager::getDeviceNamesInCategory(const int &categoryId)
 {
-    QSqlQuery query = executeQuery_("SELECT id, short_name, full_name FROM device WHERE category_id=" +
+    QSqlQuery query = executeQuery_("SELECT id, full_name FROM device WHERE category_id=" +
                                     QString::number(categoryId));
 
-    QVector<Device> result;
+    QVector<QPair<const int, const QString>> result;
     for (; query.next() ;)
     {
-        result.append(Device(query.value(0).toInt(), categoryId, query.value(1).toString(), query.value(2).toString()));
+        result.append(QPair<const int, const QString>(query.value(0).toInt(), query.value(1).toString()));
     }
 
     return result;
