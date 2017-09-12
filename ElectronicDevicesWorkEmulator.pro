@@ -29,7 +29,9 @@ SOURCES += \
     models/modelsmanager.cpp \
     models/category.cpp \
     models/device.cpp \
-    models/socket.cpp
+    models/socket.cpp \
+    interface/categorieslistwidget.cpp \
+    interface/deviceslistwidget.cpp
 
 HEADERS += \
         interface/mainwindow.h \
@@ -37,7 +39,9 @@ HEADERS += \
     models/modelsmanager.h \
     models/category.h \
     models/device.h \
-    models/socket.h
+    models/socket.h \
+    interface/categorieslistwidget.h \
+    interface/deviceslistwidget.h
 
 RESOURCES += \
     resources.qrc
