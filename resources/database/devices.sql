@@ -31,9 +31,9 @@ CREATE TABLE "device" (
 	`image_file`	TEXT,
 	FOREIGN KEY(`category_id`) REFERENCES category
 );
-INSERT INTO `device` (id,category_id,short_name,full_name,image_file) VALUES (1,1,'NOT','Инвертор',NULL),
- (2,1,'AND','Элемент 2И',NULL),
- (3,1,'NAND','Элемент 2И-НЕ',NULL);
+INSERT INTO `device` (id,category_id,short_name,full_name,image_file) VALUES (1,1,'NOT','Инвертор','NOT.gif'),
+ (2,1,'AND','Элемент 2И','AND.gif'),
+ (3,1,'NAND','Элемент 2И-НЕ','NAND.gif');
 CREATE TABLE `category` (
 	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
 	`name`	TEXT NOT NULL
