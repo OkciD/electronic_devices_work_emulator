@@ -4,13 +4,15 @@
 #include "category.h"
 #include "socket.h"
 #include <QVector>
+#include <QPixmap>
 
 namespace models
 {
 class Device
 {
 public:
-    Device(const int &id=0, const int &categoryId=0, const QString &shortName="", const QString &fullName="");
+    Device(const int &id=0, const int &categoryId=0, const QString &shortName="",
+           const QString &fullName="", const QString &imageFilePath="", bool loadTruthtable = true);
     const int &getId() const;
     const Category &getCategory() const;
     const QString &getShortName() const;
@@ -26,6 +28,7 @@ private:
     QString fullName_;
     QVector<Socket> inputSockets_;
     QVector<Socket> outputSockets_;
+    QPixmap image_;
 };
 }
 

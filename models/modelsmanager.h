@@ -15,7 +15,7 @@ public:
     static ModelsManager &instance();
     const QVector<Category> getCategories();
     const Category getCategory(const int &categoryId);
-    const QVector<QPair<const int, const QString>> getDeviceNamesInCategory(const int &categoryId);
+    const QVector<Device> getDevicesInCategory(const int &categoryId);
     QVector<Socket> getDevicesSockets(const int &deviceId);
     Device getDevice(const int &deviceId);
     ~ModelsManager();
@@ -31,6 +31,7 @@ private:
     QSqlDatabase db_;
     const QString dbName_ = "devices.db";
     const QString sqlDumpName_ = ":/resources/database/devices.sql";
+    const QString deviceImagesDirectory = ":/resources/devices_pics/";
 };
 }
 

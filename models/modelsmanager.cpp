@@ -47,15 +47,16 @@ const Category ModelsManager::getCategory(const int &categoryId)
     return Category(query.value(0).toInt(), query.value(1).toString());
 }
 
-const QVector<QPair<const int, const QString>> ModelsManager::getDeviceNamesInCategory(const int &categoryId)
+const QVector<Device> ModelsManager::getDevicesInCategory(const int &categoryId)
 {
-    QSqlQuery query = executeQuery_("SELECT id, full_name FROM device WHERE category_id=" +
+    QSqlQuery query = executeQuery_("SELECT id, short_name, full_name, image_file FROM device WHERE category_id=" +
                                     QString::number(categoryId));
 
-    QVector<QPair<const int, const QString>> result;
+    QVector<Device> result;
     for (; query.next() ;)
     {
-        result.append(QPair<const int, const QString>(query.value(0).toInt(), query.value(1).toString()));
+        result.append(Device(query.value(0).toInt(), 0, query.value(1).toString(), query.value(2).toString(),
+                             deviceImagesDirectory + query.value(3).toString(), false));
     }
 
     return result;
@@ -78,10 +79,10 @@ QVector<Socket> ModelsManager::getDevicesSockets(const int &deviceId)
 
 Device ModelsManager::getDevice(const int &deviceId)
 {
-    QSqlQuery query = executeQuery_("SELECT category_id, short_name, full_name FROM device WHERE id = " + QString::number(deviceId));
+    QSqlQuery query = executeQuery_("SELECT category_id, short_name, full_name, image_file FROM device WHERE id = " + QString::number(deviceId));
 
     query.next();
-    return Device(deviceId, query.value(0).toInt(), query.value(1).toString(), query.value(2).toString());
+    return Device(deviceId, query.value(0).toInt(), query.value(1).toString(), query.value(2).toString(), deviceImagesDirectory + query.value(3).toString());
 }
 
 void ModelsManager::openDatabase_()

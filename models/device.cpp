@@ -3,14 +3,14 @@
 
 using namespace models;
 
-Device::Device(const int &id, const int &categoryId, const QString &shortName, const QString &fullName):
-    id_(id), shortName_(shortName), fullName_(fullName)
+Device::Device(const int &id, const int &categoryId, const QString &shortName, const QString &fullName, const QString &imageFilePath, bool loadTruthtable):
+    id_(id), shortName_(shortName), fullName_(fullName), image_(QPixmap(imageFilePath))
 {
     if ( categoryId != 0 )
     {
         category_ = ModelsManager::instance().getCategory(categoryId);
     }
-    if ( id != 0 )
+    if ( (id != 0) && (loadTruthtable) )
     {
         inputSockets_ = ModelsManager::instance().getDevicesSockets(id);
         for ( QVector<Socket>::iterator iterator = inputSockets_.begin();
