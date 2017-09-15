@@ -5,8 +5,13 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
-    this->addDockWidget(Qt::LeftDockWidgetArea, (new CategoriesListWidget));
-    this->setCentralWidget((new DevicesListWidget));
+    CategoriesListWidget *categoriesListWidget = new CategoriesListWidget;
+    DevicesListWidget *devicesListWidget = new DevicesListWidget;
+
+    connect(&categoriesListWidget->getSignalMapper(), SIGNAL(mapped(int)), devicesListWidget, SLOT(showDevicesInCategory(int)));
+
+    this->addDockWidget(Qt::LeftDockWidgetArea, categoriesListWidget);
+    this->setCentralWidget(devicesListWidget);
     this->setWindowTitle("Система эмуляции работы электронных устройств");
     this->setMinimumSize(640, 480);
 }
