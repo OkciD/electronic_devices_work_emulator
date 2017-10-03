@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setCentralWidget(devicesListWidget);
     this->setWindowTitle("Система эмуляции работы электронных устройств");
     this->setMinimumSize(640, 480);
+    this->setMaximumSize(640, 480);
 }
 
 MainWindow::~MainWindow()

@@ -1,42 +1,57 @@
 #include "deviceslistwidget.h"
 
 #include <QVBoxLayout>
-#include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
 #include "models/modelsmanager.h"
+#include "devicebutton.h"
+
+const int itemsPerRow = 4;
 
 DevicesListWidget::DevicesListWidget(QWidget *parent) : QWidget(parent)
 {
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    mainLayout_ = new QGridLayout;
 
-    mainLayout->addWidget(new QLabel("Выберите категорию"));
-    mainLayout->setObjectName("mainLayout");
+    mainLayout_->addWidget(new QLabel("Выберите категорию"), 0, 0);
+    mainLayout_->setObjectName("mainLayout");
 
-    this->setLayout(mainLayout);
+    this->setLayout(mainLayout_);
 }
 
 void DevicesListWidget::showDevicesInCategory(int categoryId)
 {
-    clear_();
-
     QVector<models::Device> devices = models::ModelsManager::instance().getDevicesInCategory(categoryId);
 
-    for ( QVector<models::Device>::iterator iterator = devices.begin();
-          iterator != devices.end();
-          iterator++ )
+    clear_();
+    if ( devices.length() == 0 )
     {
-        this->layout()->addWidget(new QLabel(iterator->getFullName()));
+        mainLayout_->addWidget(new QLabel("Нет устройств"));
+        return;
+    }
+    else
+    {
+        int i = 0;
+
+        for (QVector<models::Device>::iterator iterator = devices.begin();
+             iterator != devices.end();
+             ++i)
+        {
+            for (int j = 0; (j < itemsPerRow) && (iterator != devices.end()); iterator++, ++j )
+            {
+                mainLayout_->addWidget(new DeviceButton(*iterator), i, j);
+            }
+        }
+        mainLayout_->setRowStretch(itemsPerRow, 1);
     }
 }
 
 void DevicesListWidget::clear_()
 {
-    QWidget *widget = nullptr;
-    QLayout *layout = this->layout();
+    // https://stackoverflow.com/questions/10716300/removing-qwidgets-from-a-qgridlayout
 
-    for (; (layout->count() > 0) && (widget = layout->itemAt(0)->widget()) ;)
+    mainLayout_->setRowStretch(itemsPerRow, 0);
+    for (; mainLayout_->count() > 0 ;)
     {
-        delete widget;
+        delete mainLayout_->itemAt(0)->widget();
     }
 }

@@ -48,6 +48,11 @@ const QString &Device::getFullName() const
     return fullName_;
 }
 
+const QPixmap &Device::getImage() const
+{
+    return image_;
+}
+
 QVector<Socket> &Device::getInputSockets()
 {
     return inputSockets_;
@@ -57,7 +62,6 @@ QVector<Socket> &Device::getOutputSockets()
 {
     return outputSockets_;
 }
-
 
 void Device::calculateOutputSignal()
 {

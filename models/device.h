@@ -17,6 +17,7 @@ public:
     const Category &getCategory() const;
     const QString &getShortName() const;
     const QString &getFullName() const;
+    const QPixmap &getImage() const;
     QVector<Socket> &getInputSockets();
     QVector<Socket> &getOutputSockets();
     void calculateOutputSignal();

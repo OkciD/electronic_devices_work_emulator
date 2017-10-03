@@ -31,7 +31,8 @@ SOURCES += \
     models/device.cpp \
     models/socket.cpp \
     interface/categorieslistwidget.cpp \
-    interface/deviceslistwidget.cpp
+    interface/deviceslistwidget.cpp \
+    interface/devicebutton.cpp
 
 HEADERS += \
         interface/mainwindow.h \
@@ -41,7 +42,8 @@ HEADERS += \
     models/device.h \
     models/socket.h \
     interface/categorieslistwidget.h \
-    interface/deviceslistwidget.h
+    interface/deviceslistwidget.h \
+    interface/devicebutton.h
 
 RESOURCES += \
     resources.qrc

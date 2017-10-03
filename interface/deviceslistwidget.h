@@ -2,6 +2,7 @@
 #define DEVICESLISTWIDGET_H
 
 #include <QWidget>
+#include <QGridLayout>
 
 class DevicesListWidget: public QWidget
 {
@@ -15,6 +16,7 @@ public slots:
 
 private:
     void clear_();
+    QGridLayout *mainLayout_;
 };
 
 #endif // DEVICESLISTWIDGET_H
