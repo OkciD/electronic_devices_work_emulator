@@ -6,7 +6,7 @@
 #include "models/modelsmanager.h"
 #include "devicebutton.h"
 
-const int itemsPerRow = 4;
+const int itemsPerRow = 3;
 
 DevicesListWidget::DevicesListWidget(QWidget *parent) : QWidget(parent)
 {

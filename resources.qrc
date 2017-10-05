@@ -2,11 +2,11 @@
     <qresource prefix="/">
         <file>resources/database/devices.sql</file>
         <file>resources/qss/styles.css</file>
-        <file>resources/devices_pics/AND.gif</file>
-        <file>resources/devices_pics/OR.gif</file>
         <file>resources/devices_pics/NOT.gif</file>
-        <file>resources/devices_pics/NAND.gif</file>
-        <file>resources/devices_pics/NOR.gif</file>
-        <file>resources/devices_pics/XOR.gif</file>
+        <file>resources/devices_pics/XOR2.gif</file>
+        <file>resources/devices_pics/OR2.gif</file>
+        <file>resources/devices_pics/NOR2.gif</file>
+        <file>resources/devices_pics/NAND2.gif</file>
+        <file>resources/devices_pics/AND2.gif</file>
     </qresource>
 </RCC>
