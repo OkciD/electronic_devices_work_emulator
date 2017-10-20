@@ -26,6 +26,11 @@ DeviceButton::DeviceButton(const models::Device &device)
     this->setPalette(*palette);
 }
 
+void DeviceButton::hideFrame()
+{
+    this->setFrameShape(QFrame::NoFrame);
+}
+
 void DeviceButton::mousePressEvent(QMouseEvent *event)
 {
     QFrame::mousePressEvent(event);

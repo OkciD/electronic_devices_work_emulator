@@ -11,6 +11,7 @@ class DeviceButton : public QFrame
 
 public:
     DeviceButton(const models::Device &device);
+    void hideFrame();
 
 protected:
     void mousePressEvent(QMouseEvent *event);

@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-
+#include "devicebutton.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -25,7 +25,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::changeToEmulationScreen_(QWidget *clickedDeviceButton)
 {
-    dockWidget_->setWidget(clickedDeviceButton);
+    DeviceButton *deviceButton = static_cast<DeviceButton *>(clickedDeviceButton);
+    deviceButton->hideFrame();
+    dockWidget_->setWidget(deviceButton);
 }
 
 MainWindow::~MainWindow()
