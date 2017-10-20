@@ -33,7 +33,8 @@ SOURCES += \
     interface/categorieslistwidget.cpp \
     interface/deviceslistwidget.cpp \
     interface/devicebutton.cpp \
-    interface/dockwidget.cpp
+    interface/dockwidget.cpp \
+    interface/emulationwidget.cpp
 
 HEADERS += \
         interface/mainwindow.h \
@@ -45,7 +46,8 @@ HEADERS += \
     interface/categorieslistwidget.h \
     interface/deviceslistwidget.h \
     interface/devicebutton.h \
-    interface/dockwidget.h
+    interface/dockwidget.h \
+    interface/emulationwidget.h
 
 RESOURCES += \
     resources.qrc

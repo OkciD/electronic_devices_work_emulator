@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "devicebutton.h"
+#include "emulationwidget.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -10,24 +11,32 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(&categoriesListWidget_->getSignalMapper(), SIGNAL(mapped(int)),
             devicesListWidget_, SLOT(showDevicesInCategory(int)));
-    connect(&devicesListWidget_->getSignalMapper(), SIGNAL(mapped(QWidget*)),
-            this, SLOT(changeToEmulationScreen_(QWidget *)));
+    connect(&devicesListWidget_->getWidgetSignalMapper(), SIGNAL(mapped(QWidget*)),
+            this, SLOT(changeDockWidget_(QWidget *)));
+    connect(&devicesListWidget_->getDeviceSignalMapper(), SIGNAL(mapped(int)),
+            this, SLOT(showEmulationScreen_(int)));
 
     dockWidget_->setFeatures(QDockWidget::NoDockWidgetFeatures);
     dockWidget_->setWidget(categoriesListWidget_);
-
     this->addDockWidget(Qt::LeftDockWidgetArea, dockWidget_);
     this->setCentralWidget(devicesListWidget_);
+
     this->setWindowTitle("Система эмуляции работы электронных устройств");
-    this->setMinimumSize(640, 480);
-    this->setMaximumSize(640, 480);
+    this->setMinimumSize(mainMenuSize_);
+    this->setMaximumSize(mainMenuSize_);
 }
 
-void MainWindow::changeToEmulationScreen_(QWidget *clickedDeviceButton)
+void MainWindow::changeDockWidget_(QWidget *clickedDeviceButton)
 {
     DeviceButton *deviceButton = static_cast<DeviceButton *>(clickedDeviceButton);
     deviceButton->hideFrame();
     dockWidget_->setWidget(deviceButton);
+}
+
+void MainWindow::showEmulationScreen_(int deviceId)
+{
+//    delete this->centralWidget();
+    this->setCentralWidget(new EmulationWidget(deviceId));
 }
 
 MainWindow::~MainWindow()

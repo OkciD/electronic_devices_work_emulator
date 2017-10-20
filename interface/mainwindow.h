@@ -18,9 +18,12 @@ private:
     DockWidget *dockWidget_;
     CategoriesListWidget *categoriesListWidget_;
     DevicesListWidget *devicesListWidget_;
+    const QSize mainMenuSize_ = QSize(640, 480);
+    const QSize emulationScreenSize_ = QSize(1024, 768);
 
 private slots:
-     void changeToEmulationScreen_(QWidget *clickedDeviceButton);
+     void changeDockWidget_(QWidget *clickedDeviceButton);
+     void showEmulationScreen_(int deviceId);
 };
 
 #endif // MAINWINDOW_H

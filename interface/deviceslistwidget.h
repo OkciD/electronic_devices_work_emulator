@@ -11,7 +11,8 @@ class DevicesListWidget: public QWidget
 
 public:
     DevicesListWidget(QWidget *parent = 0);
-    const QSignalMapper &getSignalMapper() const;
+    const QSignalMapper &getWidgetSignalMapper() const;
+    const QSignalMapper &getDeviceSignalMapper() const;
 
 public slots:
     void showDevicesInCategory(int categoryId);
@@ -19,7 +20,8 @@ public slots:
 private:
     void clear_();
     QGridLayout *mainLayout_;
-    QSignalMapper signalMapper_;
+    QSignalMapper widgetSignalMapper_;
+    QSignalMapper deviceSignalMapper_;
 };
 
 #endif // DEVICESLISTWIDGET_H

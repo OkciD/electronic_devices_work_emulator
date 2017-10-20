@@ -41,9 +41,10 @@ void DevicesListWidget::showDevicesInCategory(int categoryId)
             {
                 DeviceButton *newDeviceButton = new DeviceButton(*iterator);
 
-                signalMapper_.setMapping(newDeviceButton,
-                                         /*static_cast<QWidget *>(*/newDeviceButton/*)*/);
-                connect(newDeviceButton, SIGNAL(clicked()), &signalMapper_, SLOT(map()));
+                widgetSignalMapper_.setMapping(newDeviceButton, newDeviceButton);
+                deviceSignalMapper_.setMapping(newDeviceButton, iterator->getId());
+                connect(newDeviceButton, SIGNAL(clicked()), &widgetSignalMapper_, SLOT(map()));
+                connect(newDeviceButton, SIGNAL(clicked()), &deviceSignalMapper_, SLOT(map()));
 
                 mainLayout_->addWidget(newDeviceButton, i, j);
             }
@@ -63,7 +64,12 @@ void DevicesListWidget::clear_()
     }
 }
 
-const QSignalMapper &DevicesListWidget::getSignalMapper() const
+const QSignalMapper &DevicesListWidget::getWidgetSignalMapper() const
 {
-    return signalMapper_;
+    return widgetSignalMapper_;
+}
+
+const QSignalMapper &DevicesListWidget::getDeviceSignalMapper() const
+{
+    return deviceSignalMapper_;
 }
