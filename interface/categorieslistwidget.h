@@ -1,11 +1,10 @@
 #ifndef CATEGORIESLISTWIDGET_H
 #define CATEGORIESLISTWIDGET_H
 
-#include <QDockWidget>
+#include <QWidget>
 #include <QSignalMapper>
 
-
-class CategoriesListWidget : public QDockWidget
+class CategoriesListWidget : public QWidget
 {
     Q_OBJECT
 public:

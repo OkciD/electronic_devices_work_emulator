@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QGridLayout>
+#include <QSignalMapper>
 
 class DevicesListWidget: public QWidget
 {
@@ -10,6 +11,7 @@ class DevicesListWidget: public QWidget
 
 public:
     DevicesListWidget(QWidget *parent = 0);
+    const QSignalMapper &getSignalMapper() const;
 
 public slots:
     void showDevicesInCategory(int categoryId);
@@ -17,6 +19,7 @@ public slots:
 private:
     void clear_();
     QGridLayout *mainLayout_;
+    QSignalMapper signalMapper_;
 };
 
 #endif // DEVICESLISTWIDGET_H

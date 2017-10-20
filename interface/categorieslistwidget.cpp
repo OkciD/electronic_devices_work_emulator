@@ -7,11 +7,10 @@
 #include "models/modelsmanager.h"
 #include <QPushButton>
 
-CategoriesListWidget::CategoriesListWidget(QWidget *parent) : QDockWidget(parent)
+CategoriesListWidget::CategoriesListWidget(QWidget *parent) : QWidget(parent)
 {
     this->setObjectName("mainMenuWidget");
 
-    QWidget *mainWidget = new QWidget;
     QHBoxLayout *mainLayout = new QHBoxLayout;
     QVBoxLayout *categoriesLayout = new QVBoxLayout;
 
@@ -30,20 +29,9 @@ CategoriesListWidget::CategoriesListWidget(QWidget *parent) : QDockWidget(parent
     }
     categoriesLayout->addStretch();
 
-    QFrame *dividingFrame = new QFrame;
-    dividingFrame->setFrameShape(QFrame::VLine);
-    dividingFrame->setLineWidth(1);
-
-    QPalette *palette = new QPalette();
-    palette->setColor(QPalette::Foreground, QColor(200, 200, 200));
-    dividingFrame->setPalette(*palette);
-
     mainLayout->addLayout(categoriesLayout);
-    mainLayout->addWidget(dividingFrame);
 
-    mainWidget->setLayout(mainLayout);
-    this->setFeatures(QDockWidget::NoDockWidgetFeatures);
-    this->setWidget(mainWidget);
+    this->setLayout(mainLayout);
 }
 
 const QSignalMapper &CategoriesListWidget::getSignalMapper() const

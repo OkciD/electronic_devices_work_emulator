@@ -2,6 +2,7 @@
 #define DEVICEBUTTON_H
 
 #include <QFrame>
+#include <QMouseEvent>
 #include "models/modelsmanager.h"
 
 class DeviceButton : public QFrame
@@ -10,6 +11,12 @@ class DeviceButton : public QFrame
 
 public:
     DeviceButton(const models::Device &device);
+
+protected:
+    void mousePressEvent(QMouseEvent *event);
+
+signals:
+    void clicked();
 };
 
 #endif // DEVICEBUTTON_H

@@ -25,3 +25,10 @@ DeviceButton::DeviceButton(const models::Device &device)
     palette->setColor(QPalette::Foreground, QColor(200, 200, 200));
     this->setPalette(*palette);
 }
+
+void DeviceButton::mousePressEvent(QMouseEvent *event)
+{
+    QFrame::mousePressEvent(event);
+
+    emit clicked();
+}

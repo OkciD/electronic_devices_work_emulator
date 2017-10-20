@@ -20,7 +20,8 @@ DevicesListWidget::DevicesListWidget(QWidget *parent) : QWidget(parent)
 
 void DevicesListWidget::showDevicesInCategory(int categoryId)
 {
-    QVector<models::Device> devices = models::ModelsManager::instance().getDevicesInCategory(categoryId);
+    QVector<models::Device> devices = models::ModelsManager::instance()
+            .getDevicesInCategory(categoryId);
 
     clear_();
     if ( devices.length() == 0 )
@@ -38,7 +39,13 @@ void DevicesListWidget::showDevicesInCategory(int categoryId)
         {
             for (int j = 0; (j < itemsPerRow) && (iterator != devices.end()); iterator++, ++j )
             {
-                mainLayout_->addWidget(new DeviceButton(*iterator), i, j);
+                DeviceButton *newDeviceButton = new DeviceButton(*iterator);
+
+                signalMapper_.setMapping(newDeviceButton,
+                                         /*static_cast<QWidget *>(*/newDeviceButton/*)*/);
+                connect(newDeviceButton, SIGNAL(clicked()), &signalMapper_, SLOT(map()));
+
+                mainLayout_->addWidget(newDeviceButton, i, j);
             }
         }
         mainLayout_->setRowStretch(itemsPerRow, 1);
@@ -54,4 +61,9 @@ void DevicesListWidget::clear_()
     {
         delete mainLayout_->itemAt(0)->widget();
     }
+}
+
+const QSignalMapper &DevicesListWidget::getSignalMapper() const
+{
+    return signalMapper_;
 }
