@@ -35,13 +35,10 @@ void MainWindow::changeDockWidget_(QWidget *clickedDeviceButton)
 
 void MainWindow::showEmulationScreen_(int deviceId)
 {
-//    delete this->centralWidget();
     this->setCentralWidget(new EmulationWidget(deviceId));
 }
 
 MainWindow::~MainWindow()
 {
-    delete categoriesListWidget_;
-    delete devicesListWidget_;
-    delete dockWidget_;
+
 }

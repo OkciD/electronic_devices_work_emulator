@@ -10,7 +10,7 @@ class DeviceButton : public QFrame
     Q_OBJECT
 
 public:
-    DeviceButton(const models::Device &device);
+    DeviceButton(const models::Device &device, QWidget *parent = nullptr);
     void hideFrame();
 
 protected:

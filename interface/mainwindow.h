@@ -18,7 +18,7 @@ private:
     DockWidget *dockWidget_;
     CategoriesListWidget *categoriesListWidget_;
     DevicesListWidget *devicesListWidget_;
-    const QSize mainMenuSize_ = QSize(640, 480);
+    const QSize mainMenuSize_ = QSize(1024, 768);
     const QSize emulationScreenSize_ = QSize(1024, 768);
 
 private slots:

@@ -3,7 +3,7 @@
 #include <QVBoxLayout>
 #include <QLabel>
 
-DeviceButton::DeviceButton(const models::Device &device)
+DeviceButton::DeviceButton(const models::Device &device, QWidget *parent) : QFrame(parent)
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
 
