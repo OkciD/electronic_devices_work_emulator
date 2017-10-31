@@ -3,6 +3,7 @@
 
 #include <QFrame>
 #include <QPainter>
+#include <QMouseEvent>
 
 class SocketWidget : public QFrame
 {
@@ -16,11 +17,13 @@ public slots:
 
 protected:
     void paintEvent(QPaintEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void resizeEvent(QResizeEvent *event);
 
 private:
-    int lowLevelHeight_;
     int highLevelHeight_;
-    QVector<QPair<int, int>> signalPoints_;
+    int lowLevelHeight_;
+    QVector<QPoint> signalPoints_;
 
     void updateLevelHeights_();
 };
