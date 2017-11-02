@@ -40,26 +40,32 @@ void SocketWidget::paintEvent(QPaintEvent *event)
     painter.drawLine(0, highLevelHeight_, this->width(), highLevelHeight_);
     painter.drawLine(0, lowLevelHeight_, this->width(), lowLevelHeight_);
 
-    // drawing signal lines
-    painter.setPen(QPen(Qt::blue, 2, Qt::SolidLine));
-    QVector<QPoint> linePoints;
-    linePoints.append(*signalPoints_.begin());
+    // preparing vectors of points for drawing vertical signal time lines and signal level lines
+    QVector<QPoint> signalLevelLinePoints;
+    QVector<QPoint> signalTimeLinePoints;
+    signalLevelLinePoints.append(*signalPoints_.begin());
     for (QVector<QPoint>::iterator signalPointsIterator = signalPoints_.begin() + 1;
          signalPointsIterator != signalPoints_.end();
          signalPointsIterator++)
     {
+        signalTimeLinePoints.append(*(new QPoint(signalPointsIterator->x(), 0)));
+        signalTimeLinePoints.append(*(new QPoint(signalPointsIterator->x(), this->height())));
+
         if (signalPointsIterator->y() != (signalPointsIterator - 1)->y())
         {
-            linePoints.append(*(new QPoint((signalPointsIterator - 1)->x(), signalPointsIterator->y())));
-            linePoints.append(*(new QPoint(signalPointsIterator->x(), signalPointsIterator->y())));
+            signalLevelLinePoints.append(*(new QPoint((signalPointsIterator - 1)->x(), signalPointsIterator->y())));
+            signalLevelLinePoints.append(*(new QPoint(signalPointsIterator->x(), signalPointsIterator->y())));
         }
         else
         {
-            linePoints.append(*signalPointsIterator);
+            signalLevelLinePoints.append(*signalPointsIterator);
         }
     }
-
-    painter.drawPolyline(linePoints);
+    // drawing them
+    painter.setPen(QPen(Qt::red, 1, Qt::DashDotDotLine));
+    painter.drawLines(signalTimeLinePoints);
+    painter.setPen(QPen(Qt::blue, 2, Qt::SolidLine));
+    painter.drawPolyline(signalLevelLinePoints);
 }
 
 void SocketWidget::mousePressEvent(QMouseEvent *event)
