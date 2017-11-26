@@ -53,14 +53,21 @@ const QPixmap &Device::getImage() const
     return image_;
 }
 
-QVector<Socket> &Device::getInputSockets()
+// sorry for this
+QVector<Socket *> Device::getSockets(SocketType socketType)
 {
-    return inputSockets_;
-}
+    QVector<Socket> *sockets = (socketType == SocketType::INPUT) ?
+                &inputSockets_ :
+                &outputSockets_;
+    QVector<Socket *> result;
+    for (QVector<Socket>::iterator socketsIterator = sockets->begin();
+         socketsIterator != sockets->end();
+         socketsIterator++)
+    {
+        result.append(&(*socketsIterator));
+    }
 
-QVector<Socket> &Device::getOutputSockets()
-{
-    return outputSockets_;
+    return result;
 }
 
 void Device::calculateOutputSignal()

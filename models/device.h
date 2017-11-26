@@ -8,6 +8,11 @@
 
 namespace models
 {
+enum SocketType {
+    INPUT,
+    OUTPUT
+};
+
 class Device
 {
 public:
@@ -18,8 +23,7 @@ public:
     const QString &getShortName() const;
     const QString &getFullName() const;
     const QPixmap &getImage() const;
-    QVector<Socket> &getInputSockets();
-    QVector<Socket> &getOutputSockets();
+    QVector<Socket *> getSockets(SocketType socketType);
     void calculateOutputSignal();
 
 private:

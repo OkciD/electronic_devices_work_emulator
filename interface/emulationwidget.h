@@ -14,11 +14,12 @@ public:
 private:
     models::Device device_;
     QVector<SocketWidget *> inputSocketsWidgets_, outputSocketWidgets_;
+    SocketWidget *choosenSocketWidget_;
 
 signals:
 
 private slots:
-    void onSignalAdded_(QWidget *clickedSignalWidget);
+    void onSignalAdded_(int clickedSocketWidgetId);
 };
 
 #endif // EMULATIONWIDGET_H
