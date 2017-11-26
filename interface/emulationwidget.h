@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "models/modelsmanager.h"
+#include "socketwidget.h"
 
 class EmulationWidget : public QWidget
 {
@@ -12,10 +13,12 @@ public:
 
 private:
     models::Device device_;
+    QVector<SocketWidget *> inputSocketsWidgets_, outputSocketWidgets_;
 
 signals:
 
-public slots:
+private slots:
+    void onSignalAdded_(QWidget *clickedSignalWidget);
 };
 
 #endif // EMULATIONWIDGET_H

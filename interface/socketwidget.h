@@ -4,14 +4,18 @@
 #include <QFrame>
 #include <QPainter>
 #include <QMouseEvent>
+#include <models/socket.h>
 
 class SocketWidget : public QFrame
 {
     Q_OBJECT
 public:
-    explicit SocketWidget(QWidget *parent = nullptr);
+    explicit SocketWidget(models::Socket * const socket, QWidget *parent = nullptr);
+    models::Socket *getSocket() const;
+    const QVector<QPoint> &getSignalPoints() const;
 
 signals:
+    void signalAdded();
 
 public slots:
 
@@ -24,6 +28,7 @@ private:
     int highLevelHeight_;
     int lowLevelHeight_;
     QVector<QPoint> signalPoints_;
+    models::Socket *socket_;
 
     void updateLevelHeights_();
 };

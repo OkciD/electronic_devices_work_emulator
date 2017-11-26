@@ -1,7 +1,8 @@
 #include "socketwidget.h"
 #include <QDebug>
 
-SocketWidget::SocketWidget(QWidget *parent) : QFrame(parent)
+SocketWidget::SocketWidget(models::Socket * const socket, QWidget *parent) :
+    QFrame(parent), socket_(socket)
 {
     this->setFrameShape(QFrame::Box);
     this->setLineWidth(2);
@@ -9,6 +10,16 @@ SocketWidget::SocketWidget(QWidget *parent) : QFrame(parent)
     QPalette *palette = new QPalette();
     palette->setColor(QPalette::Foreground, QColor(200, 200, 200));
     this->setPalette(*palette);
+}
+
+models::Socket *SocketWidget::getSocket() const
+{
+    return socket_;
+}
+
+const QVector<QPoint> &SocketWidget::getSignalPoints() const
+{
+    return signalPoints_;
 }
 
 void SocketWidget::updateLevelHeights_()
@@ -93,4 +104,6 @@ void SocketWidget::mousePressEvent(QMouseEvent *event)
     }
 
     this->update();
+
+    emit(signalAdded());
 }
