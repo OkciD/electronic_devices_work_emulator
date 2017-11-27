@@ -2,7 +2,7 @@
 #include <QDebug>
 
 SocketWidget::SocketWidget(models::Socket * const socket, QWidget *parent) :
-    QFrame(parent), socket_(socket)
+    QFrame(parent), socket_(socket), lastCalculatedSignalIndex(0)
 {
     this->setFrameShape(QFrame::Box);
     this->setLineWidth(2);
@@ -20,6 +20,54 @@ models::Socket *SocketWidget::getSocket() const
 const QVector<QPoint> &SocketWidget::getSignalPoints() const
 {
     return signalPoints_;
+}
+
+size_t searchTheNearestSignalPointIndex(QVector<QPoint> pointArray, const size_t &lowerBorder, const int &time)
+{
+    size_t firstIndex = lowerBorder, lastIndex = pointArray.length() - 1, middleIndex = 0;
+
+    for (; lastIndex - firstIndex > 1 ;)
+    {
+        middleIndex = (firstIndex + lastIndex) / 2;
+
+        if ( time <= pointArray[middleIndex].x() )
+        {
+            lastIndex = middleIndex;
+        }
+        else
+        {
+            firstIndex = middleIndex;
+        }
+    }
+
+    return lastIndex;
+}
+
+const QString SocketWidget::getSignalState(int time)
+{
+    size_t nearestSignalsIndex = searchTheNearestSignalPointIndex(signalPoints_, lastCalculatedSignalIndex, time);
+
+    return (signalPoints_[nearestSignalsIndex].y() == lowLevelHeight_) ? "0" : "1";
+}
+
+int SocketWidget::getTimesSignalChanges(int time)
+{
+    size_t nearestSignalsIndex = searchTheNearestSignalPointIndex(signalPoints_, lastCalculatedSignalIndex, time);
+    int result = 0;
+
+    QVector<QPoint>::iterator begin = signalPoints_.begin() + lastCalculatedSignalIndex + 1;
+    for (QVector<QPoint>::iterator signalPointsIterator = begin;
+         (signalPointsIterator < signalPoints_.end()) &&
+         (signalPointsIterator - begin < nearestSignalsIndex);
+         signalPointsIterator++)
+    {
+        if ((signalPointsIterator - 1)->y() != signalPointsIterator->y())
+        {
+            result++;
+        }
+    }
+
+    return result;
 }
 
 void SocketWidget::updateLevelHeights_()

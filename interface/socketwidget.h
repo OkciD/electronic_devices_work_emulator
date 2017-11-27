@@ -13,6 +13,8 @@ public:
     explicit SocketWidget(models::Socket * const socket, QWidget *parent = nullptr);
     models::Socket *getSocket() const;
     const QVector<QPoint> &getSignalPoints() const;
+    const QString getSignalState(int time);
+    int getTimesSignalChanges(int time);
 
 signals:
     void signalAdded();
@@ -29,6 +31,7 @@ private:
     int lowLevelHeight_;
     QVector<QPoint> signalPoints_;
     models::Socket *socket_;
+    int lastCalculatedSignalIndex;
 
     void updateLevelHeights_();
 };
