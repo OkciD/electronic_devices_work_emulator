@@ -2,7 +2,7 @@
 #include <QDebug>
 
 SocketWidget::SocketWidget(models::Socket * const socket, QWidget *parent) :
-    QFrame(parent), socket_(socket), lastCalculatedSignalIndex(0)
+    QFrame(parent), socket_(socket), lastCalculatedSignalIndex_(0)
 {
     this->setFrameShape(QFrame::Box);
     this->setLineWidth(2);
@@ -22,15 +22,15 @@ const QVector<QPoint> &SocketWidget::getSignalPoints() const
     return signalPoints_;
 }
 
-size_t searchTheNearestSignalPointIndex(QVector<QPoint> pointArray, const size_t &lowerBorder, const int &time)
+size_t SocketWidget::searchSignalPoint(const int &time)
 {
-    size_t firstIndex = lowerBorder, lastIndex = pointArray.length() - 1, middleIndex = 0;
+    size_t firstIndex = lastCalculatedSignalIndex_, lastIndex = signalPoints_.length() - 1, middleIndex = 0;
 
     for (; lastIndex - firstIndex > 1 ;)
     {
         middleIndex = (firstIndex + lastIndex) / 2;
 
-        if ( time <= pointArray[middleIndex].x() )
+        if ( time <= signalPoints_[middleIndex].x() )
         {
             lastIndex = middleIndex;
         }
@@ -45,17 +45,22 @@ size_t searchTheNearestSignalPointIndex(QVector<QPoint> pointArray, const size_t
 
 const QString SocketWidget::getSignalState(int time)
 {
-    size_t nearestSignalsIndex = searchTheNearestSignalPointIndex(signalPoints_, lastCalculatedSignalIndex, time);
+    size_t nearestSignalsIndex = searchSignalPoint(time);
 
     return (signalPoints_[nearestSignalsIndex].y() == lowLevelHeight_) ? "0" : "1";
 }
 
 int SocketWidget::getTimesSignalChanges(int time)
 {
-    size_t nearestSignalsIndex = searchTheNearestSignalPointIndex(signalPoints_, lastCalculatedSignalIndex, time);
+    if (signalPoints_.empty())
+    {
+        return 0;
+    }
+
+    size_t nearestSignalsIndex = searchSignalPoint(time);
     int result = 0;
 
-    QVector<QPoint>::iterator begin = signalPoints_.begin() + lastCalculatedSignalIndex + 1;
+    QVector<QPoint>::iterator begin = signalPoints_.begin() + lastCalculatedSignalIndex_ + 1;
     for (QVector<QPoint>::iterator signalPointsIterator = begin;
          (signalPointsIterator < signalPoints_.end()) &&
          (signalPointsIterator - begin < nearestSignalsIndex);
@@ -70,6 +75,26 @@ int SocketWidget::getTimesSignalChanges(int time)
     return result;
 }
 
+int SocketWidget::getLastCalculatedSignalIndex() const
+{
+    return lastCalculatedSignalIndex_;
+}
+
+void SocketWidget::updateLastCalculatedSignalIndex(int time)
+{
+    lastCalculatedSignalIndex_ = searchSignalPoint(time) - 1;
+}
+
+void SocketWidget::drawSignal(int time, QString signalLevel)
+{
+    if (signalPoints_.empty())
+    {
+        signalPoints_.append(*(new QPoint(0, (signalLevel == "1") ? highLevelHeight_ : lowLevelHeight_)));
+    }
+    signalPoints_.append(*(new QPoint(time, (signalLevel == "1") ? highLevelHeight_ : lowLevelHeight_)));
+    update();
+}
+
 void SocketWidget::updateLevelHeights_()
 {
     highLevelHeight_ = 0.2 * this->height();
@@ -81,10 +106,6 @@ void SocketWidget::resizeEvent(QResizeEvent *event)
     QFrame::resizeEvent(event);
 
     updateLevelHeights_();
-    if (signalPoints_.empty())
-    {
-        signalPoints_.append(*(new QPoint(0, lowLevelHeight_)));
-    }
 }
 
 void SocketWidget::paintEvent(QPaintEvent *event)
@@ -98,6 +119,11 @@ void SocketWidget::paintEvent(QPaintEvent *event)
     painter.setPen(QPen(Qt::gray, 1, Qt::DashLine));
     painter.drawLine(0, highLevelHeight_, this->width(), highLevelHeight_);
     painter.drawLine(0, lowLevelHeight_, this->width(), lowLevelHeight_);
+
+    if (signalPoints_.empty())
+    {
+        return;
+    }
 
     // preparing vectors of points for drawing vertical signal time lines and signal level lines
     QVector<QPoint> signalLevelLinePoints;
@@ -131,7 +157,7 @@ void SocketWidget::mousePressEvent(QMouseEvent *event)
 {
     QFrame::mousePressEvent(event);
 
-    if (event->x() <= signalPoints_.last().x())
+    if (!signalPoints_.empty() && event->x() <= signalPoints_.last().x())
     {
         return;
     }
@@ -146,6 +172,10 @@ void SocketWidget::mousePressEvent(QMouseEvent *event)
         if ((event->y() >= *levelHeightsIterator - clickAreaWidth) &&
                 (event->y() <= *levelHeightsIterator + clickAreaWidth))
         {
+            if (signalPoints_.empty())
+            {
+                signalPoints_.append(*(new QPoint(0, *levelHeightsIterator)));
+            }
             signalPoints_.append(*(new QPoint(event->x(), *levelHeightsIterator)));
             break;
         }

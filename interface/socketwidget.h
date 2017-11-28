@@ -15,11 +15,10 @@ public:
     const QVector<QPoint> &getSignalPoints() const;
     const QString getSignalState(int time);
     int getTimesSignalChanges(int time);
-
-signals:
-    void signalAdded();
-
-public slots:
+    int getLastCalculatedSignalIndex() const;
+    void updateLastCalculatedSignalIndex(int time);
+    void drawSignal(int time, QString signalLevel);
+    size_t searchSignalPoint(const int &time);
 
 protected:
     void paintEvent(QPaintEvent *event);
@@ -31,9 +30,12 @@ private:
     int lowLevelHeight_;
     QVector<QPoint> signalPoints_;
     models::Socket *socket_;
-    int lastCalculatedSignalIndex;
+    int lastCalculatedSignalIndex_;
 
     void updateLevelHeights_();
+
+signals:
+    void signalAdded();
 };
 
 #endif // SOCKETWIDGET_H
