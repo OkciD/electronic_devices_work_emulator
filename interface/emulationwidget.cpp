@@ -67,7 +67,6 @@ void EmulationWidget::onSignalAdded_(int clickedSocketWidgetId)
             chosenSocketWidget_ = *inputSocketsWidgetsIterator;
         }
     }
-    qDebug() << "Chosen:" << chosenSocketWidget_->getSocket()->getName();
 
     QVector<QPoint> chosenSignalPoints = chosenSocketWidget_->getSignalPoints();
     // cutting the last signal time of chosen signal widget if necessary

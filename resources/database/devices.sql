@@ -6,9 +6,7 @@ CREATE TABLE "truth_table" (
 	FOREIGN KEY(`device_id`) REFERENCES device,
 	FOREIGN KEY(`socket_id`) REFERENCES socket
 );
-INSERT INTO `truth_table` (device_id,socket_id,conditions) VALUES (1,1,'0 1'),
- (1,2,'1 0'),
- (2,3,'0 0 1 1'),
+INSERT INTO `truth_table` (device_id,socket_id,conditions) VALUES (2,3,'0 0 1 1'),
  (2,4,'0 1 0 1'),
  (2,2,'0 0 0 1'),
  (3,3,'0 0 1 1'),
@@ -37,8 +35,7 @@ CREATE TABLE "device" (
 	`image_file`	TEXT,
 	FOREIGN KEY(`category_id`) REFERENCES category
 );
-INSERT INTO `device` (id,category_id,short_name,full_name,image_file) VALUES (1,1,'NOT','Инвертор','NOT.gif'),
- (2,1,'AND2','Элемент 2И','AND2.gif'),
+INSERT INTO `device` (id,category_id,short_name,full_name,image_file) VALUES (2,1,'AND2','Элемент 2И','AND2.gif'),
  (3,1,'NAND2','Элемент 2И-НЕ','NAND2.gif'),
  (4,1,'OR2','Элемент 2ИЛИ','OR2.gif'),
  (5,1,'NOR2','Элемент 2ИЛИ-НЕ','NOR2.gif');
